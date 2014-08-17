@@ -1,0 +1,22 @@
+{
+  "name": "eter",
+  "version": "0.0.1",
+  "description": "Lightweight collections for JavaScript",
+  "author": "Keyvan Akbary <kiwwito@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:keyvanakbary/eter.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "coffee-script": "^1.7.1",
+    "gulp": "^3.7.0",
+    "gulp-mocha": "^1.0.0",
+    "gulp-coffee": "^2.1.1",
+    "gulp-wrap": "^0.3.0"
+  },
+  "scripts": {
+    "test": "gulp test"
+  }
+}
