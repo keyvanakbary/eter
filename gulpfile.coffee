@@ -10,11 +10,11 @@ gulp.task "compile", ->
     .pipe gulp.dest("build/")
 
 gulp.task "test", ->
-  gulp.src("tests/*", read: false)
+  gulp.src("test/*", read: false)
     .pipe mocha()
 
 gulp.task "watch", ->
   gulp.watch "src/*", ["test"]
-  gulp.watch "tests/*", ["test"]
+  gulp.watch "test/*", ["test"]
 
 gulp.task "default", ["test"]
