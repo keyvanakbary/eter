@@ -57,3 +57,21 @@ l.toArray();//[2, 2, 3]
 
 l.contains(2);//true
 ```
+
+### Trie
+```javascript
+var t = new eter.Trie();
+
+t.insertAll(['one', 'oh', 'on']);
+t.getAll();//['on', 'oh', 'one']
+
+t.contains('one');//true
+
+t.insert('foo');
+t.getAll();//['foo', 'on', 'oh', 'one']
+
+t.remove('foo');
+t.getAll();//['on', 'oh', 'one']
+
+t.getPrefixed('on');//['on', 'one']
+```
