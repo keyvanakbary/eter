@@ -5,7 +5,6 @@
 *Éter* is a conglomerate of lightweight collections for JavaScript running on [node](http://nodejs.org/) and browser.
 
 ## Usage
-
 For node, [install the package](https://www.npmjs.org/package/eter) and include it
 ```javascript
 var eter = require('eter');
@@ -19,6 +18,7 @@ For the browser, just include the modules you want
 ## Collections
 
 ### Stack
+A [Stack](http://en.wikipedia.org/wiki/Stack_(abstract_data_type)) is a [Last-In-First-Out (LIFO)](http://en.wikipedia.org/wiki/LIFO_(computing)) data structure.
 ```javascript
 var s = new eter.Stack();
 
@@ -30,6 +30,7 @@ s.toArray();//[2, 1]
 ```
 
 ### Queue
+A [Queue](http://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is a [First-In-First-Out (FIFO)](http://en.wikipedia.org/wiki/FIFO_(computing)) data structure.
 ```javascript
 var q = new eter.Queue();
 
@@ -41,6 +42,7 @@ q.toArray();//[2, 3]
 ```
 
 ### LinkedList
+A [Linked List](http://www.wikiwand.com/en/Linked_list) is a data structure consisting of a group of nodes which together represent a sequence.
 ```javascript
 var l = new eter.LinkedList();
 
@@ -59,6 +61,7 @@ l.contains(2);//true
 ```
 
 ### Trie
+A [Trie](http://en.wikipedia.org/wiki/Trie) is an ordered tree data structure that is used to store a dynamic set or associative array where the keys are usually strings.
 ```javascript
 var t = new eter.Trie();
 
