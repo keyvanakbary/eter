@@ -128,7 +128,7 @@ Trie = (function() {
     _ref = node.children;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       child = _ref[_i];
-      words = values(child, word).concat(words);
+      words = words.concat(values(child, word));
     }
     return words;
   };

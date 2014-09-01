@@ -64,7 +64,7 @@ class Trie
     words = []
     words.push(word) if node.word
     for child in node.children
-      words = values(child, word).concat(words)
+      words = words.concat(values(child, word))
     words
 
 exports.Trie = Trie

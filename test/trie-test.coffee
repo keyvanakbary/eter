@@ -10,7 +10,7 @@ describe "Trie", ->
 
   it "should retrieve all words", ->
     trie.insertAll(["one", "ones", "two", "onyx"])
-    expect(trie.getAll()).to.be.eql ["two", "onyx", "ones", "one"]
+    expect(trie.getAll()).to.be.eql ["one", "ones", "onyx", "two"]
 
   describe "contains", ->
     words = []
@@ -42,8 +42,8 @@ describe "Trie", ->
       trie.insertAll(["one", "ones", "open", "two"])
 
     it "should return a subset of words", ->
-      expect(trie.getPrefixed("o")).to.be.eql ["open", "ones", "one"]
-      expect(trie.getPrefixed("on")).to.be.eql ["ones", "one"]
+      expect(trie.getPrefixed("o")).to.be.eql ["one", "ones", "open"]
+      expect(trie.getPrefixed("on")).to.be.eql ["one", "ones"]
 
     it "should return nothing on no match", ->
       expect(trie.getPrefixed("k")).to.be.eql []
