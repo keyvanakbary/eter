@@ -2,6 +2,7 @@
   "name": "eter",
   "version": "0.0.5",
   "description": "Lightweight collections for JavaScript",
+  "keywords": ["collections", "stack", "queue", "linked list", "trie"],
   "author": "Keyvan Akbary <kiwwito@gmail.com>",
   "repository": {
     "type": "git",
