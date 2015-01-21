@@ -78,3 +78,17 @@ t.getAll();//['on', 'oh', 'one']
 
 t.getPrefixed('on');//['on', 'one']
 ```
+
+### Hash Map
+A [Hash Map](http://en.wikipedia.org/wiki/Hash_table) is a data structure used to implement an associative array, a structure that can map keys to values.
+```javascript
+var m = new eter.HashMap();
+
+m.set('key', 'value');
+m.set('key');//value
+
+m.contains('key');//true
+
+m.remove('foo');
+m.contains('key');//false
+```
