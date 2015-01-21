@@ -51,7 +51,7 @@ LinkedList = (function() {
     var n;
     assertIndexInBounds(this, index);
     n = null;
-    iterate(this, function(i, node) {
+    iterate.call(this, function(i, node) {
       if (i === index) {
         n = node;
         return false;
@@ -70,7 +70,7 @@ LinkedList = (function() {
     var previous;
     assertIndexInBounds(this, index);
     previous = null;
-    return iterate(this, (function(_this) {
+    return iterate.call(this, (function(_this) {
       return function(i, node) {
         var n;
         if (i === index) {
@@ -119,15 +119,15 @@ LinkedList = (function() {
   };
 
   LinkedList.prototype.forEach = function(fn) {
-    return iterate(this, function(i, node) {
+    return iterate.call(this, function(i, node) {
       return fn(i, node.value);
     });
   };
 
-  iterate = function(list, fn) {
+  iterate = function(fn) {
     var i, node;
     i = 0;
-    node = list.first;
+    node = this.first;
     while (node) {
       if (fn(i, node) === false) {
         return;

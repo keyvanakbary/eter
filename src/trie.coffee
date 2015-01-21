@@ -7,7 +7,7 @@ class Trie
     {char: char, children: [], word: false}
   
   insert: (word) ->
-    [node, length] = pathFor(@root, word)
+    [node, length] = pathFor.call(@, word)
     for char in word.substr(length)
       newNode = createNode(char)
       node.children.push(newNode)
@@ -17,10 +17,11 @@ class Trie
   insertAll: (words) ->
     @insert(word) for word in words
   
-  pathFor = (node, word) ->
+  pathFor = (word) ->
     length = 0
-    parent = node
+    parent = @root
     index = 0
+    node = @root
     for char in word
       match = false
       for i, child of node.children
@@ -34,11 +35,11 @@ class Trie
     [node, length, parent, index]
 
   contains: (word) ->
-    [node, length] = pathFor(@root, word)
+    [node, length] = pathFor.call(@, word)
     word.length is length and node.word
 
   remove: (word) ->
-    [node, length, parent, index] = pathFor(@root, word)
+    [node, length, parent, index] = pathFor.call(@, word)
     return if word.length isnt length
     if hasChildren(node)
       removeChild(parent, index)
@@ -52,7 +53,7 @@ class Trie
     node.children.splice(index, 1)
   
   getPrefixed: (prefix) ->
-    [node, length] = pathFor(@root, prefix)
+    [node, length] = pathFor.call(@, prefix)
     return [] if prefix.length isnt length
     values(node, prefix.substr(0, length - 1))
   

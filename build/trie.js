@@ -31,7 +31,7 @@ Trie = (function() {
 
   Trie.prototype.insert = function(word) {
     var char, length, newNode, node, _i, _len, _ref, _ref1;
-    _ref = pathFor(this.root, word), node = _ref[0], length = _ref[1];
+    _ref = pathFor.call(this, word), node = _ref[0], length = _ref[1];
     _ref1 = word.substr(length);
     for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
       char = _ref1[_i];
@@ -52,11 +52,12 @@ Trie = (function() {
     return _results;
   };
 
-  pathFor = function(node, word) {
-    var char, child, i, index, length, match, parent, _i, _len, _ref;
+  pathFor = function(word) {
+    var char, child, i, index, length, match, node, parent, _i, _len, _ref;
     length = 0;
-    parent = node;
+    parent = this.root;
     index = 0;
+    node = this.root;
     for (_i = 0, _len = word.length; _i < _len; _i++) {
       char = word[_i];
       match = false;
@@ -80,13 +81,13 @@ Trie = (function() {
 
   Trie.prototype.contains = function(word) {
     var length, node, _ref;
-    _ref = pathFor(this.root, word), node = _ref[0], length = _ref[1];
+    _ref = pathFor.call(this, word), node = _ref[0], length = _ref[1];
     return word.length === length && node.word;
   };
 
   Trie.prototype.remove = function(word) {
     var index, length, node, parent, _ref;
-    _ref = pathFor(this.root, word), node = _ref[0], length = _ref[1], parent = _ref[2], index = _ref[3];
+    _ref = pathFor.call(this, word), node = _ref[0], length = _ref[1], parent = _ref[2], index = _ref[3];
     if (word.length !== length) {
       return;
     }
@@ -107,7 +108,7 @@ Trie = (function() {
 
   Trie.prototype.getPrefixed = function(prefix) {
     var length, node, _ref;
-    _ref = pathFor(this.root, prefix), node = _ref[0], length = _ref[1];
+    _ref = pathFor.call(this, prefix), node = _ref[0], length = _ref[1];
     if (prefix.length !== length) {
       return [];
     }

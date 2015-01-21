@@ -19,7 +19,7 @@ class LinkedList
   get: (index) ->
     assertIndexInBounds(@, index)
     n = null
-    iterate @, (i, node) ->
+    iterate.call @, (i, node) ->
       if i is index
         n = node
         return false
@@ -31,7 +31,7 @@ class LinkedList
   insert: (index, value) ->
     assertIndexInBounds(@, index)
     previous = null
-    iterate @, (i, node) =>
+    iterate.call @, (i, node) =>
       if i is index
         n =
           value: value
@@ -62,12 +62,12 @@ class LinkedList
     value
 
   forEach: (fn) ->
-    iterate @, (i, node) ->
+    iterate.call @, (i, node) ->
       fn(i, node.value)
 
-  iterate = (list, fn) ->
+  iterate = (fn) ->
     i = 0
-    node = list.first
+    node = @first
     while node
       return if fn(i, node) is false
       node = node.next
