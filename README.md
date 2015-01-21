@@ -85,7 +85,7 @@ A [Hash Map](http://en.wikipedia.org/wiki/Hash_table) is a data structure used t
 var m = new eter.HashMap();
 
 m.set('key', 'value');
-m.set('key');//value
+m.get('key');//value
 
 m.contains('key');//true
 
