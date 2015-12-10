@@ -11,7 +11,7 @@ dist: build
 lib: build
 	@cp -R build/src lib && rm lib/bundle.*
 
-build: clean
+build:
 	@tsc
 
 clean:
