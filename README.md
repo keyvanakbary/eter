@@ -95,6 +95,6 @@ m.get('key');//value
 
 m.contains('key');//true
 
-m.remove('foo');
+m.remove('key');
 m.contains('key');//false
 ```
