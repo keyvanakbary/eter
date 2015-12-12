@@ -221,7 +221,7 @@ var Trie = (function () {
     function Trie() {
         this.root = new Node('');
     }
-    Trie.prototype.insert = function (word) {
+    Trie.prototype.insert = function (word, value) {
         var node = this.root;
         var length = 0;
         for (; length < word.length; length++) {
@@ -234,10 +234,10 @@ var Trie = (function () {
             }
         }
         if (length == word.length) {
-            node.isWord = true;
+            node.value = value;
         }
         else {
-            node.add(word.substr(length));
+            node.add(word.substr(length), value);
         }
     };
     Trie.prototype.remove = function (word) {
@@ -253,13 +253,13 @@ var Trie = (function () {
             }
         }
         if (node.hasChildren()) {
-            node.isWord = false;
+            node.value = null;
         }
         else {
             parent.remove(word[word.length - 1]);
         }
     };
-    Trie.prototype.contains = function (word) {
+    Trie.prototype.get = function (word) {
         var node = this.root;
         for (var i = 0; i < word.length; i++) {
             var child = node.find(word[i]);
@@ -267,10 +267,10 @@ var Trie = (function () {
                 node = child;
             }
             else {
-                return false;
+                return null;
             }
         }
-        return node.isWord;
+        return node.value;
     };
     return Trie;
 })();
@@ -295,13 +295,13 @@ var Node = (function () {
     Node.prototype.hasChildren = function () {
         return this.children.length > 0;
     };
-    Node.prototype.add = function (word) {
+    Node.prototype.add = function (word, value) {
         var node = new Node(word.charAt(0));
         if (word.length == 1) {
-            node.isWord = true;
+            node.value = value;
         }
         else {
-            node.add(word.substr(1));
+            node.add(word.substr(1), value);
         }
         this.children.push(node);
     };

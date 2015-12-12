@@ -1,7 +1,7 @@
-export class Trie {
-    private root: Node = new Node('');
+export class Trie<T> {
+    private root: Node<T> = new Node<T>('');
 
-    insert(word: string) {
+    insert(word: string, value: T) {
         let node = this.root;
         let length = 0;
         for(;length < word.length; length++) {
@@ -13,14 +13,14 @@ export class Trie {
             }
         }
         if (length == word.length) {
-            node.isWord = true;
+            node.value = value;
         } else {
-            node.add(word.substr(length));
+            node.add(word.substr(length), value);
         }
     }
 
     remove(word: string) {
-        let parent: Node, node: Node = this.root;
+        let parent: Node<T>, node: Node<T> = this.root;
         for(let i = 0; i < word.length; i++) {
             let child = node.find(word[i]);
             if (child) {
@@ -31,34 +31,35 @@ export class Trie {
             }
         }
         if (node.hasChildren()) {
-            node.isWord = false;
+            node.value = null;
         } else {
             parent.remove(word[word.length - 1]);
         }
     }
 
-    contains(word: string) {
+    get(word: string): T {
         let node = this.root;
         for(let i = 0; i < word.length; i++) {
             let child = node.find(word[i]);
             if (child) {
                 node = child;
             } else {
-                return false;
+                return null;
             }
         }
 
-        return node.isWord;
+        return node.value;
     }
 }
 
-class Node {
-    private children: Node[] = [];
+class Node<T> {
+    private children: Node<T>[] = [];
+    public value: T;
     public isWord: boolean = false;
 
     constructor(public char: string) {}
 
-    find(char: string): Node {
+    find(char: string): Node<T> {
         let found = this.children.filter(child => {
             return child.char == char;
         });
@@ -75,12 +76,12 @@ class Node {
         return this.children.length > 0;
     }
 
-    add(word: string) {
-        let node = new Node(word.charAt(0));
+    add(word: string, value: T) {
+        let node = new Node<T>(word.charAt(0));
         if (word.length == 1) {
-            node.isWord = true;
+            node.value = value;
         } else {
-            node.add(word.substr(1));
+            node.add(word.substr(1), value);
         }
         this.children.push(node);
     }
