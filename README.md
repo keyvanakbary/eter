@@ -92,9 +92,19 @@ var m = new eter.HashMap();
 
 m.put('key', 'value');
 m.get('key');//value
-
 m.contains('key');//true
-
 m.remove('key');
 m.contains('key');//false
+```
+
+### Binary Tree
+A [Binary Tree](https://en.wikipedia.org/wiki/Binary_tree) is a data structure used for logarithmic search access.
+
+```js
+var t = new eter.BinaryTree();
+
+t.insert(10, 'value');
+t.get(10);//value
+t.remove(10);
+t.get(10);//null
 ```

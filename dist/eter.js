@@ -1,21 +1,108 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var BinaryTree = (function () {
+    function BinaryTree() {
+    }
+    BinaryTree.prototype.insert = function (key, value) {
+        this.root = this.insertAt(key, value, this.root);
+    };
+    BinaryTree.prototype.insertAt = function (key, value, node) {
+        if (!node) {
+            return new Node(key, value);
+        }
+        if (key == node.key) {
+            node.value = value;
+            return node;
+        }
+        if (key > node.key) {
+            node.right = this.insertAt(key, value, node.right);
+        }
+        else {
+            node.left = this.insertAt(key, value, node.left);
+        }
+        return node;
+    };
+    BinaryTree.prototype.get = function (key) {
+        for (var node = this.root; node;) {
+            if (key == node.key) {
+                return node.value;
+            }
+            else if (key > node.key) {
+                node = node.right;
+            }
+            else {
+                node = node.left;
+            }
+        }
+        return null;
+    };
+    BinaryTree.prototype.remove = function (key) {
+        this.root = this.removeAt(key, this.root);
+    };
+    BinaryTree.prototype.removeAt = function (key, node) {
+        if (!node) {
+            return null;
+        }
+        if (key == node.key) {
+            if (!node.left) {
+                return node.right;
+            }
+            else if (!node.right) {
+                return node.left;
+            }
+            else {
+                var max = this.findMax(node.left);
+                node.value = max.value;
+                node.key = max.key;
+                node.left = this.removeAt(key, node.left);
+            }
+        }
+        else if (key > node.key) {
+            node.right = this.removeAt(key, node.right);
+        }
+        else {
+            node.left = this.removeAt(key, node.left);
+        }
+        return node;
+    };
+    BinaryTree.prototype.findMax = function (node) {
+        while (node.right) {
+            node = node.right;
+        }
+        return node;
+    };
+    return BinaryTree;
+})();
+exports.BinaryTree = BinaryTree;
+var Node = (function () {
+    function Node(key, value) {
+        this.key = key;
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+    return Node;
+})();
+
+},{}],2:[function(require,module,exports){
 window.eter = require('./eter');
 
-},{"./eter":2}],2:[function(require,module,exports){
+},{"./eter":3}],3:[function(require,module,exports){
 var stack_1 = require('./stack');
 var queue_1 = require('./queue');
 var linked_list_1 = require('./linked_list');
 var hash_map_1 = require('./hash_map');
 var trie_1 = require('./trie');
+var binary_tree_1 = require('./binary_tree');
 module.exports = {
     Stack: stack_1.Stack,
     Queue: queue_1.Queue,
     LinkedList: linked_list_1.LinkedList,
     HashMap: hash_map_1.HashMap,
-    Trie: trie_1.Trie
+    Trie: trie_1.Trie,
+    BinaryTree: binary_tree_1.BinaryTree
 };
 
-},{"./hash_map":3,"./linked_list":4,"./queue":5,"./stack":6,"./trie":7}],3:[function(require,module,exports){
+},{"./binary_tree":1,"./hash_map":4,"./linked_list":5,"./queue":6,"./stack":7,"./trie":8}],4:[function(require,module,exports){
 var HashMap = (function () {
     function HashMap(size) {
         this.size = size;
@@ -80,7 +167,7 @@ var Node = (function () {
     return Node;
 })();
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var LinkedList = (function () {
     function LinkedList() {
         this.size = 0;
@@ -145,7 +232,7 @@ var Node = (function () {
     return Node;
 })();
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var Queue = (function () {
     function Queue() {
         this.size = 0;
@@ -184,7 +271,7 @@ var Node = (function () {
     return Node;
 })();
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var Stack = (function () {
     function Stack() {
         this.size = 0;
@@ -216,7 +303,7 @@ var Node = (function () {
     return Node;
 })();
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var Trie = (function () {
     function Trie() {
         this.root = new Node('');
@@ -308,4 +395,4 @@ var Node = (function () {
     return Node;
 })();
 
-},{}]},{},[1]);
+},{}]},{},[2]);
