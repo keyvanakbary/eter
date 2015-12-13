@@ -18,7 +18,7 @@ For the browser, just include the modules you want. You could use [Bower](http:/
 And include the script
 
 ```html
-<script src="dist/eter.js"></script>
+<script src="path/to/eter/dist/eter.js"></script>
 ```
 
 ## Types
