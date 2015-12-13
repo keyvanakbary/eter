@@ -1,0 +1,24 @@
+{
+  "name": "eter",
+  "description": "Lightweight collections for JavaScript",
+  "main": "dist/eter.js",
+  "authors": [
+    "Keyvan Akbary <kiwwito@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "collections",
+    "stack",
+    "queue",
+    "linked",
+    "list",
+    "trie"
+  ],
+  "homepage": "https://github.com/keyvanakbary/eter",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "src",
+    "test"
+  ]
+}

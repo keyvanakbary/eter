@@ -11,7 +11,11 @@ For node, [install the package](https://www.npmjs.org/package/eter) and include 
 var eter = require('eter');
 ```
 
-For the browser, just include the modules you want
+For the browser, just include the modules you want. You could use [Bower](http://bower.io/) to install the package
+
+    bower install eter --save
+
+And include the script
 
 ```html
 <script src="dist/eter.js"></script>
