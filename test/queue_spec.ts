@@ -33,4 +33,16 @@ describe('Queue', () => {
             expect(() => queue.dequeue()).to.throw('Empty queue');
         });
     });
+
+    describe('each', () => {
+        it('should came in order', () => {
+            queue.enqueue(1);
+            queue.enqueue(2);
+
+            let values:number[] = [];
+            queue.each(value => values.push(value));
+
+            expect(values).to.be.deep.equal([1, 2]);
+        });
+    });
 });

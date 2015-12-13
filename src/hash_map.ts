@@ -58,6 +58,12 @@ export class HashMap<T> {
         let chain = this.chainForKey(key);
         return this.find(key, chain) >= 0;
     }
+
+    each(fn: (value: T, key: string) => void) {
+        this.table.forEach(chain => {
+            chain.forEach(node => fn(node.value, node.key));
+        });
+    }
 }
 
 class Node<T> {

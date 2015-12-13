@@ -6,9 +6,9 @@ export class Queue<T> {
 
     enqueue(value: T): void {
         if (this.isEmpty()) {
-            this.first = this.last = new Node<T>(value, null);
+            this.first = this.last = new Node<T>(value);
         } else {
-            let node = new Node<T>(value, this.last);
+            let node = new Node<T>(value);
             this.last.next = node;
             this.last = node;
         }
@@ -28,11 +28,16 @@ export class Queue<T> {
     isEmpty(): boolean {
         return this.size == 0;
     }
+
+    each(fn: (value: T) => void) {
+        for(let node = this.first; node;) {
+            fn(node.value);
+            node = node.next;
+        }
+    }
 }
 
 class Node<T> {
-    constructor(
-        public value: T,
-        public next: Node<T>
-    ) {}
+    public next: Node<T>;
+    constructor(public value: T) {}
 }

@@ -2,8 +2,8 @@ export class Stack<T> {
     private size: number = 0;
     private head: Node<T>;
 
-    push(n: T): void {
-        this.head = new Node<T>(n, this.head);
+    push(value: T): void {
+        this.head = new Node<T>(value, this.head);
         this.size++;
     }
 
@@ -19,6 +19,13 @@ export class Stack<T> {
 
     isEmpty(): boolean {
         return this.size == 0;
+    }
+
+    each(fn: (value: T) => void) {
+        for(let node = this.head; node;) {
+            fn(node.value);
+            node = node.previous;
+        }
     }
 }
 

@@ -53,5 +53,24 @@ describe('LinkedList', () => {
 
             expect(list.size).to.be.equal(1);
         });
-    })
+    });
+
+    describe('each', () => {
+        it('should came in order', () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            expect(values(list)).to.be.deep.equal([1, 2, 3]);
+        });
+    });
+
+    function values(list: LinkedList<number>): number[] {
+        let values:number[] = [];
+        list.each((value: number, index: number) => {
+            values[index] = value;
+        });
+
+        return values;
+    }
 });

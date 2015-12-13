@@ -41,5 +41,17 @@ describe('Stack', () => {
             expect(stack.pop()).to.equal(2);
             expect(stack.pop()).to.equal(1);
         });
-    })
+    });
+
+    describe('each', () => {
+        it('should came in reverse order', () => {
+            stack.push(1);
+            stack.push(2);
+
+            let values:number[] = [];
+            stack.each(value => values.push(value));
+
+            expect(values).to.be.deep.equal([2, 1]);
+        });
+    });
 });

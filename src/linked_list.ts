@@ -56,6 +56,14 @@ export class LinkedList<T> {
             previous = current;
         }
     }
+
+    each(fn: (value: T, index: number) => void) {
+        let node: Node<T> = this.head;
+        for(let i = 0; i < this.size; i++) {
+            fn(node.value, i);
+            node = node.next;
+        }
+    }
 }
 
 class Node<T> {

@@ -47,15 +47,26 @@ export class Trie<T> {
                 return null;
             }
         }
+        return node.value ? node.value : null;
+    }
 
-        return node.value;
+    each(fn: (word: string, value: T) => void) {
+        this.eachFor(this.root, '', fn);
+    }
+
+    private eachFor(node: Node<T>, prefix: string, fn: (word: string, value: T) => void) {
+        if (node.value) {
+            fn(prefix + node.char, node.value);
+        }
+        node.children.forEach(child => {
+            this.eachFor(child, prefix + node.char, fn);
+        });
     }
 }
 
 class Node<T> {
-    private children: Node<T>[] = [];
+    public children: Node<T>[] = [];
     public value: T;
-    public isWord: boolean = false;
 
     constructor(public char: string) {}
 

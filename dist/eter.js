@@ -70,6 +70,21 @@ var BinaryTree = (function () {
         }
         return node;
     };
+    BinaryTree.prototype.each = function (fn) {
+        this.eachFor(this.root, fn);
+    };
+    BinaryTree.prototype.eachFor = function (node, fn) {
+        if (!node) {
+            return;
+        }
+        fn(node.value, node.key);
+        if (node.right) {
+            this.eachFor(node.right, fn);
+        }
+        if (node.left) {
+            this.eachFor(node.left, fn);
+        }
+    };
     return BinaryTree;
 })();
 exports.BinaryTree = BinaryTree;
@@ -156,6 +171,11 @@ var HashMap = (function () {
         var chain = this.chainForKey(key);
         return this.find(key, chain) >= 0;
     };
+    HashMap.prototype.each = function (fn) {
+        this.table.forEach(function (chain) {
+            chain.forEach(function (node) { return fn(node.value, node.key); });
+        });
+    };
     return HashMap;
 })();
 exports.HashMap = HashMap;
@@ -222,6 +242,13 @@ var LinkedList = (function () {
             previous = current;
         }
     };
+    LinkedList.prototype.each = function (fn) {
+        var node = this.head;
+        for (var i = 0; i < this.size; i++) {
+            fn(node.value, i);
+            node = node.next;
+        }
+    };
     return LinkedList;
 })();
 exports.LinkedList = LinkedList;
@@ -239,10 +266,10 @@ var Queue = (function () {
     }
     Queue.prototype.enqueue = function (value) {
         if (this.isEmpty()) {
-            this.first = this.last = new Node(value, null);
+            this.first = this.last = new Node(value);
         }
         else {
-            var node = new Node(value, this.last);
+            var node = new Node(value);
             this.last.next = node;
             this.last = node;
         }
@@ -260,13 +287,18 @@ var Queue = (function () {
     Queue.prototype.isEmpty = function () {
         return this.size == 0;
     };
+    Queue.prototype.each = function (fn) {
+        for (var node = this.first; node;) {
+            fn(node.value);
+            node = node.next;
+        }
+    };
     return Queue;
 })();
 exports.Queue = Queue;
 var Node = (function () {
-    function Node(value, next) {
+    function Node(value) {
         this.value = value;
-        this.next = next;
     }
     return Node;
 })();
@@ -276,8 +308,8 @@ var Stack = (function () {
     function Stack() {
         this.size = 0;
     }
-    Stack.prototype.push = function (n) {
-        this.head = new Node(n, this.head);
+    Stack.prototype.push = function (value) {
+        this.head = new Node(value, this.head);
         this.size++;
     };
     Stack.prototype.pop = function () {
@@ -291,6 +323,12 @@ var Stack = (function () {
     };
     Stack.prototype.isEmpty = function () {
         return this.size == 0;
+    };
+    Stack.prototype.each = function (fn) {
+        for (var node = this.head; node;) {
+            fn(node.value);
+            node = node.previous;
+        }
     };
     return Stack;
 })();
@@ -357,7 +395,19 @@ var Trie = (function () {
                 return null;
             }
         }
-        return node.value;
+        return node.value ? node.value : null;
+    };
+    Trie.prototype.each = function (fn) {
+        this.eachFor(this.root, '', fn);
+    };
+    Trie.prototype.eachFor = function (node, prefix, fn) {
+        var _this = this;
+        if (node.value) {
+            fn(prefix + node.char, node.value);
+        }
+        node.children.forEach(function (child) {
+            _this.eachFor(child, prefix + node.char, fn);
+        });
     };
     return Trie;
 })();
@@ -366,7 +416,6 @@ var Node = (function () {
     function Node(char) {
         this.char = char;
         this.children = [];
-        this.isWord = false;
     }
     Node.prototype.find = function (char) {
         var found = this.children.filter(function (child) {

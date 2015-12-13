@@ -24,4 +24,21 @@ describe('Trie', () => {
 
         expect(trie.get('word')).to.be.null;
     });
+
+    describe('each', () => {
+        it('should iterate every word', () => {
+            trie.insert('toad', 'toad');
+            trie.insert('toast', 'toast');
+            trie.insert('thomson', 'thomson');
+
+            let values: [string, string][] = [];
+            trie.each((word, value) => values.push([word, value]));
+
+            expect(values).to.be.deep.equal([
+                ['toad', 'toad'],
+                ['toast', 'toast'],
+                ['thomson', 'thomson']
+            ]);
+        });
+    });
 });

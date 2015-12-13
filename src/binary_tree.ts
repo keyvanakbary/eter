@@ -67,6 +67,23 @@ export class BinaryTree<T> {
         }
         return node;
     }
+
+    each(fn: (value: T, key: number) => void) {
+        this.eachFor(this.root, fn);
+    }
+
+    private eachFor(node: Node<T>, fn: (value: T, key: number) => void) {
+        if (!node) {
+            return;
+        }
+        fn(node.value, node.key);
+        if (node.right) {
+            this.eachFor(node.right, fn);
+        }
+        if (node.left) {
+            this.eachFor(node.left, fn);
+        }
+    }
 }
 
 class Node<T> {

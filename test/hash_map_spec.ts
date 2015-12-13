@@ -49,4 +49,27 @@ describe('HashMap', () => {
             expect(map.get('key')).to.be.null;
         });
     });
+
+    describe('each', () => {
+        it('should iterate the tree', () => {
+            map.put('key1', 'value1');
+            map.put('key2', 'value2');
+            map.put('key3', 'value3');
+
+            expect(keyValues(map)).to.be.deep.equal([
+                ['key2', 'value2'],
+                ['key3', 'value3'],
+                ['key1', 'value1']
+            ])
+        });
+    });
+
+    function keyValues(map: HashMap<string>): [string, string][] {
+        let keyValues: [string, string][] = [];
+        map.each((value: string, key: string) => {
+            keyValues.push([key, value]);
+        });
+
+        return keyValues;
+    }
 });

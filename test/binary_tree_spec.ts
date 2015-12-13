@@ -44,4 +44,31 @@ describe('BinaryTree', () => {
             expect(tree.get(10)).to.be.null;
         });
     });
+
+    describe('each', () => {
+        it('should iterate the tree', () => {
+            tree.insert(5, 'five');
+            tree.insert(4, 'four');
+            tree.insert(10, 'ten');
+            tree.insert(6, 'six');
+            tree.insert(15, 'fifteen');
+
+            expect(keyValues(tree)).to.be.deep.equal([
+                [5, 'five'],
+                [10, 'ten'],
+                [15, 'fifteen'],
+                [6, 'six'],
+                [4, 'four']
+            ])
+        });
+    });
+
+    function keyValues(tree: BinaryTree<string>): [number, string][] {
+        let keyValues: [number, string][] = [];
+        tree.each((value: string, key: number) => {
+            keyValues.push([key, value]);
+        });
+
+        return keyValues;
+    }
 });
